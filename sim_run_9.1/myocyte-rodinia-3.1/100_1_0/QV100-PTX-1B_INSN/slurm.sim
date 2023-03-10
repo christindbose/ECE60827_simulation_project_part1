@@ -1,0 +1,53 @@
+#! /bin/bash
+#SBATCH -J myocyte-rodinia-3.1-100_1_0.gpgpu-sim_git-commit-948c0e1_modified_0.0
+#SBATCH --threads-per-core=1
+#SBATCH --cpus-per-task=1
+#SBATCH --nodes=1
+#SBATCH --mem-per-cpu=4G
+#SBACTH --time=200:00:00,
+#SBATCH -p batch
+#SBATCH --mail-type=END,FAIL
+#SBATCH --export=ALL
+#SBATCH --output=/tmp/myocyte-rodinia-3.1-100_1_0.gpgpu-sim_git-commit-948c0e1_modified_0.0.o%j
+#SBATCH --error=/tmp/myocyte-rodinia-3.1-100_1_0.gpgpu-sim_git-commit-948c0e1_modified_0.0.e%j
+
+copy_output() {
+    mv /tmp/myocyte-rodinia-3.1-100_1_0.gpgpu-sim_git-commit-948c0e1_modified_0.0.e7 ./myocyte-rodinia-3.1-100_1_0.gpgpu-sim_git-commit-948c0e1_modified_0.0.e7
+    mv /tmp/myocyte-rodinia-3.1-100_1_0.gpgpu-sim_git-commit-948c0e1_modified_0.0.o7 ./myocyte-rodinia-3.1-100_1_0.gpgpu-sim_git-commit-948c0e1_modified_0.0.o7
+}
+
+trap copy_output ERR
+
+set -e
+
+if [ "$GPGPUSIM_SETUP_ENVIRONMENT_WAS_RUN" != "1" ]; then
+    export GPGPUSIM_ROOT=/home/min/a/chris241/Documents/Courses/695GPU/TA/part1/60827_simulation_project_part1/gpu-simulator/gpgpu-sim
+    source $GPGPUSIM_ROOT/setup_environment
+else
+    echo "Skipping setup_environment - already set"
+fi
+
+echo "doing: export -n PTX_SIM_USE_PTX_FILE"
+export -n PTX_SIM_USE_PTX_FILE
+echo "doing: export LD_LIBRARY_PATH=/home/min/a/chris241/Documents/Courses/695GPU/TA/part1/60827_simulation_project_part1/util/job_launching/../../sim_run_9.1/gpgpu-sim-builds/gpgpu-sim_git-commit-948c0e1_modified_0.0:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH=/home/min/a/chris241/Documents/Courses/695GPU/TA/part1/60827_simulation_project_part1/util/job_launching/../../sim_run_9.1/gpgpu-sim-builds/gpgpu-sim_git-commit-948c0e1_modified_0.0:$LD_LIBRARY_PATH
+echo "doing: cd /home/min/a/chris241/Documents/Courses/695GPU/TA/part1/60827_simulation_project_part1/util/job_launching/../../sim_run_9.1/myocyte-rodinia-3.1/100_1_0/QV100-PTX-1B_INSN"
+cd /home/min/a/chris241/Documents/Courses/695GPU/TA/part1/60827_simulation_project_part1/util/job_launching/../../sim_run_9.1/myocyte-rodinia-3.1/100_1_0/QV100-PTX-1B_INSN
+echo "doing: export OPENCL_CURRENT_TEST_PATH=/home/min/a/chris241/Documents/Courses/695GPU/TA/part1/60827_simulation_project_part1/util/job_launching/../../sim_run_9.1/myocyte-rodinia-3.1/100_1_0/QV100-PTX-1B_INSN"
+export OPENCL_CURRENT_TEST_PATH=/home/min/a/chris241/Documents/Courses/695GPU/TA/part1/60827_simulation_project_part1/util/job_launching/../../sim_run_9.1/myocyte-rodinia-3.1/100_1_0/QV100-PTX-1B_INSN
+echo "doing: export OPENCL_REMOTE_GPU_HOST=REPLACE_REMOTE_HOST"
+export OPENCL_REMOTE_GPU_HOST=REPLACE_REMOTE_HOST
+echo "doing "
+
+echo "doing: export PATH=/home/min/a/chris241/Documents/Courses/695GPU/TA/part1/60827_simulation_project_part1/gpu-simulator/gpgpu-sim/bin:/home/min/a/ee695paa/cuda/bin:/home/min/a/ee695paa/cuda/bin:/home/min/a/chris241/Documents/Courses/695GPU/TA/part1/accel-sim-framework/gpu-simulator/gpgpu-sim/bin:/home/min/a/ee695paa/cuda/bin:/home/min/a/ee695paa/cuda/bin:/package/gcc/8.3.0/bin:/home/min/a/chris241/.vscode-server/bin/5e805b79fcb6ba4c2d23712967df89a089da575b/bin/remote-cli:/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/package/gcc/8.3.0/bin:/usr/local/bin:/usr/bin:/package/eda/xilinx/Vivado/2018.3/bin:/package/eda/synopsys/vcs-mx-O-2018.09-SP2/linux64/bin:/package/eda/synopsys/vcs-mx-O-2018.09-SP2/bin:/home/min/a/chris241/Documents/Researchwork/timeloop-accelergy/accelergy-timeloop-infrastructure/src/timeloop/bin/:/home/min/a/chris241/.local/bin/:/opt/gcc/6.1.0/bin:/home/yara/mithuna2/mpich-install/bin:/usr/local/sbin:/usr/sbin:.:/home/min/a/chris241/Documents/Researchwork/timeloop-accelergy/accelergy-timeloop-infrastructure/src/timeloop/bin/:/home/min/a/chris241/.local/bin/:/opt/gcc/6.1.0/bin:/home/yara/mithuna2/mpich-install/bin"
+export PATH=/home/min/a/chris241/Documents/Courses/695GPU/TA/part1/60827_simulation_project_part1/gpu-simulator/gpgpu-sim/bin:/home/min/a/ee695paa/cuda/bin:/home/min/a/ee695paa/cuda/bin:/home/min/a/chris241/Documents/Courses/695GPU/TA/part1/accel-sim-framework/gpu-simulator/gpgpu-sim/bin:/home/min/a/ee695paa/cuda/bin:/home/min/a/ee695paa/cuda/bin:/package/gcc/8.3.0/bin:/home/min/a/chris241/.vscode-server/bin/5e805b79fcb6ba4c2d23712967df89a089da575b/bin/remote-cli:/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/package/gcc/8.3.0/bin:/usr/local/bin:/usr/bin:/package/eda/xilinx/Vivado/2018.3/bin:/package/eda/synopsys/vcs-mx-O-2018.09-SP2/linux64/bin:/package/eda/synopsys/vcs-mx-O-2018.09-SP2/bin:/home/min/a/chris241/Documents/Researchwork/timeloop-accelergy/accelergy-timeloop-infrastructure/src/timeloop/bin/:/home/min/a/chris241/.local/bin/:/opt/gcc/6.1.0/bin:/home/yara/mithuna2/mpich-install/bin:/usr/local/sbin:/usr/sbin:.:/home/min/a/chris241/Documents/Researchwork/timeloop-accelergy/accelergy-timeloop-infrastructure/src/timeloop/bin/:/home/min/a/chris241/.local/bin/:/opt/gcc/6.1.0/bin:/home/yara/mithuna2/mpich-install/bin
+
+# Uncomment to force blocking torque launches
+# this needs to be commented for concurrent kernel ptx mode
+echo "doing export CUDA_LAUNCH_BLOCKING=1"
+export CUDA_LAUNCH_BLOCKING=1
+
+
+echo "doing:  /home/min/a/ee695paa/github/gpu-app-collection/src/..//bin/9.1/release/myocyte-rodinia-3.1 100 1 0"
+ /home/min/a/ee695paa/github/gpu-app-collection/src/..//bin/9.1/release/myocyte-rodinia-3.1 100 1 0
+copy_output
