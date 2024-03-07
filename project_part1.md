@@ -2,7 +2,7 @@
 
 ## Professor: Tim Rogers <br> TA: Christin Bose
 
-## Due on Sunday, April 13 2024 at 11:59 PM ET 
+## Due on Saturday, April 13 2024 at 11:59 PM ET 
 
 ## Introduction to GPU Simulation
 
